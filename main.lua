@@ -63,11 +63,6 @@ local imageRay_angled
 local background = display.newRect(bgGroup, display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight);
 background:setFillColor(166/255, 185/255, 193/255)
 
-
-local yMidLine = display.newLine(mainGroup, 0, yMid, display.contentWidth, yMid)
-yMidLine.strokeWidth = 2
-yMidLine:setStrokeColor(0,0,0)
-
 local mirror = display.newCircle( mainGroup, xMid - 5998, yMid, 6000 )
 mirror.strokeWidth = 5
 mirror:setStrokeColor(0,0,0)
@@ -200,7 +195,9 @@ local function makeAngledFullRay()
 end
 
 local function makeFocus()
-    realSide_focus = display.newLine(mainGroup, xMid - focusDistance, yMid + 15, xMid - focusDistance, yMid - 15)
+    realSide_focus = display.newCircle( mainGroup, xMid - focusDistance, yMid, 10 )
+    realSide_focus:setFillColor(255/255,255/255,0)
+    --realSide_focus = display.newLine(mainGroup, xMid - focusDistance, yMid + 15, xMid - focusDistance, yMid - 15)
     realSide_focus.strokeWidth = 2
     realSide_focus:setStrokeColor(0,0,0)
 end
@@ -263,9 +260,9 @@ local function startUI()
     updateObjectAndRadiusOfCurvText()
     makeHorizontalFullRay()
     makeAngledFullRay()
-    makeFocus()
     makeObjectRay()
     makeImageRay()
+    makeFocus()
 end
 
 local function resetAllUI()
@@ -339,8 +336,6 @@ actually make display here
 
 ]]
 
-resetAllUI()
-
 -- used for making the object bigger/smaller, change distance wtver..
 local objectHover = display.newRect(mainGroup, xMid - objectDistance_re_xMid, yMid - objectHeight / 2, 40, objectHeight)
 objectHover:setFillColor(0, 0, 0, 0.1)
@@ -362,3 +357,13 @@ concaveText:setFillColor(0,0,0,0.25)
 
 local convexText = display.newText( mainGroup, "Convex", 985, 50, 500, 65, native.systemFont, 55, "center")
 convexText:setFillColor(0,0,0,0.25)
+
+local maxOfMidLine = 25
+local marginX = 10
+for i = 1, maxOfMidLine do
+    local yMidLine = display.newLine(mainGroup, (display.contentWidth/maxOfMidLine)*(i - 1), yMid, (display.contentWidth/maxOfMidLine)*i - marginX, yMid)
+    yMidLine.strokeWidth = 2
+    yMidLine:setStrokeColor(255/255,0,0,0.5)
+end
+
+resetAllUI()

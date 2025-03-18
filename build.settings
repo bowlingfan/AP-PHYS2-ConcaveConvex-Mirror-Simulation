@@ -41,15 +41,6 @@ settings =
     {
         -- Settings for Win32 apps go here
 		singleInstance = true,
-		resizable = true,
-		minViewWidth = 275,
-		minViewHeight = 200,
-
-		titleText = {
-            -- The "default" text will be used if the system is using a language and/or
-            -- country code not defined below. This serves as a fallback mechanism.
-            default = "AP Physics 2 mirror simulation program",
-		},
     },
 
 
